@@ -1,8 +1,8 @@
 # SpecScore AI Plugin
 
-AI plugin for [SpecScore](https://github.com/synchestra-io/specscore) — skills that teach AI agents how to use the `specscore` CLI for spec navigation, linting, and lifecycle operations.
+AI plugin for [SpecScore](https://specscore.md) — skills that teach AI agents how to use the `specscore` CLI for spec navigation, linting, and lifecycle operations.
 
-This repository contains the plugin source. It is installed on top of the [`specscore` CLI](https://github.com/synchestra-io/specscore); the CLI is a prerequisite.
+This repository contains the plugin source. It is installed on top of the [`specscore` CLI](https://github.com/synchestra-io/specscore-cli); the CLI is a prerequisite.
 
 ## Contents
 
@@ -33,7 +33,7 @@ Verify with `specscore --version`.
 
 ## Relationship to the CLI
 
-The plugin wraps the `specscore` CLI — it does not replace it. Skills encode *when* to call a command, *which* flags to pass, and *how* to interpret exit codes. The CLI contract (commands, flags, exit codes) is defined in [`synchestra-io/specscore`](https://github.com/synchestra-io/specscore).
+The plugin wraps the `specscore` CLI — it does not replace it. Skills encode *when* to call a command, *which* flags to pass, and *how* to interpret exit codes. The CLI contract (commands, flags, exit codes) is defined in [`synchestra-io/specscore-cli`](https://github.com/synchestra-io/specscore-cli).
 
 A change in the CLI surface typically produces a matching skill update in this repository; the two evolve together but release independently.
 

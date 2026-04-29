@@ -23,19 +23,19 @@ All skills are prefixed with the plugin's manifest name. Users invoke them as:
 |---|---|
 | [`install/`](install/SKILL.md) | Install the `specscore` CLI via the official `get-cli` installer. Runtime prerequisite for every wrapper skill. |
 
-## Planned CLI-wrapper catalogue
+## Available CLI-wrapper skills
 
-The wrapper catalogue mirrors the `specscore` CLI surface. One resource-level skill per command group, per-verb `references/<verb>.md` inside each. Each row links to the authoritative CLI feature spec that defines the command's contract.
+The wrapper catalogue mirrors the `specscore` CLI surface. One resource-level skill per command group, per-verb `references/<verb>.md` inside each. Each row links to both the local skill and the authoritative CLI feature spec that defines the command's contract.
 
 | Skill | Wraps | Verbs | CLI feature spec |
 |---|---|---|---|
-| `feature/` | `specscore feature ...` | `info`, `list`, `tree`, `deps`, `refs`, `new` | [`cli/feature`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/feature/README.md) |
-| `task/` | `specscore task ...` | `list`, `info`, `new` | [`cli/task`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/task/README.md) |
-| `spec/` | `specscore spec ...` | `lint` | [`cli/spec`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/spec/README.md) |
-| `code/` | `specscore code ...` | `deps` | [`cli/code`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/code/README.md) |
-| `idea/` | `specscore idea ...` | TBD — pending CLI migration to strict resource+verb pattern | [`cli/new/idea`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/new/idea/README.md) |
+| [`feature/`](feature/SKILL.md) | `specscore feature ...` | `list`, `info`, `tree`, `deps`, `refs`, `new` | [`cli/feature`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/feature/README.md) |
+| [`task/`](task/SKILL.md) | `specscore task ...` | `list`, `info`, `new` | [`cli/task`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/task/README.md) |
+| [`spec/`](spec/SKILL.md) | `specscore spec ...` | `lint` | [`cli/spec`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/spec/README.md) |
+| [`code/`](code/SKILL.md) | `specscore code ...` | `deps` | [`cli/code`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/code/README.md) |
+| [`idea/`](idea/SKILL.md) | `specscore new idea ...` (today) → `specscore idea new ...` (pending) | `new` | [`cli/new/idea`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/new/idea/README.md) |
 
-The Synchestra.io CLI ecosystem (synchestra, specscore, rehearse) is standardising on a strict `resource + verb` command shape. The top-level `specscore new` command is legacy from before this convention and is not wrapped here; it will be replaced by the appropriate `<resource> new` form in the CLI. The shared exit-code contract, output-format conventions, and `--project` autodetect rules that every wrapper assumes are defined once in the [CLI parent feature](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md).
+The Synchestra.io CLI ecosystem (synchestra, specscore, rehearse) is standardising on a strict `resource + verb` command shape. The top-level `specscore new` command is legacy from before this convention; the `idea/` skill currently shells out to `specscore new idea <slug>` and will be updated to `specscore idea new <slug>` transparently when the CLI migrates. The shared exit-code contract, output-format conventions, and `--project` autodetect rules that every wrapper assumes are defined once in the [CLI parent feature](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md).
 
 The exact shape of each resource skill follows the template defined in [`agent-skills` feature spec](https://github.com/synchestra-io/synchestra/blob/main/spec/features/agent-skills/README.md#skill-file-format):
 
@@ -68,16 +68,15 @@ Every CLI-wrapper skill must verify that `specscore` is installed before invokin
 >
 > Do not proceed with the original command until `specscore --version` succeeds.
 
-When the first wrapper skill lands, this snippet may be extracted to a shared reference file and linked from each `SKILL.md`. Until then, it lives here as the single source of truth.
+Each shipped wrapper SKILL.md embeds this block verbatim at the top. If the snippet ever needs to evolve (e.g., a different install URL), update it once here and propagate the change through every wrapper.
 
 ## Status
 
-**Shipped:** `install/` (infrastructure).
+**Shipped:** `install/` (infrastructure), `feature/`, `task/`, `spec/`, `code/`, `idea/` (CLI wrappers).
 
-The CLI-wrapper skills listed above are still planned; individual wrappers ship incrementally as they are authored.
+All wrappers in the catalogue are now available. New CLI verbs land in the relevant skill's `references/` directory in the same release cycle as the CLI surface change.
 
 ## Outstanding Questions
 
-- The final per-verb list tracks the `specscore` CLI's evolving surface. When new CLI commands land, a corresponding reference file is added here in the same release cycle.
 - Whether to ship a `design/` skill in this plugin is **parked**. There is no `specscore design` CLI command today. If one is added later, a wrapping skill lands in the same release. Until then, "design" is purely a methodology concept and lives in the [`spec-studio`](https://github.com/synchestra-io/spec-studio) plugin.
-- Final shape of the `idea/` skill depends on the `specscore` CLI migrating fully to the resource+verb pattern (e.g., `specscore idea new <slug>` instead of the current `specscore idea <slug>`).
+- The `idea/` skill currently shells out to the legacy `specscore new idea <slug>` form. When the CLI migrates to the strict resource+verb pattern (`specscore idea new <slug>`), the skill's reference will be updated; the user-facing skill name (`idea`) does not change.
