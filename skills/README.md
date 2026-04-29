@@ -25,17 +25,17 @@ All skills are prefixed with the plugin's manifest name. Users invoke them as:
 
 ## Planned CLI-wrapper catalogue
 
-The wrapper catalogue mirrors the `specscore` CLI surface. One resource-level skill per command group, per-verb `references/<verb>.md` inside each.
+The wrapper catalogue mirrors the `specscore` CLI surface. One resource-level skill per command group, per-verb `references/<verb>.md` inside each. Each row links to the authoritative CLI feature spec that defines the command's contract.
 
-| Skill | Wraps | Verbs |
-|---|---|---|
-| `feature/` | `specscore feature ...` | `info`, `list`, `tree`, `deps`, `refs`, `new` |
-| `task/` | `specscore task ...` | `list`, `info`, `new` |
-| `spec/` | `specscore spec ...` | `lint` |
-| `code/` | `specscore code ...` | `deps` |
-| `idea/` | `specscore idea ...` | TBD — pending CLI migration to strict resource+verb pattern |
+| Skill | Wraps | Verbs | CLI feature spec |
+|---|---|---|---|
+| `feature/` | `specscore feature ...` | `info`, `list`, `tree`, `deps`, `refs`, `new` | [`cli/feature`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/feature/README.md) |
+| `task/` | `specscore task ...` | `list`, `info`, `new` | [`cli/task`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/task/README.md) |
+| `spec/` | `specscore spec ...` | `lint` | [`cli/spec`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/spec/README.md) |
+| `code/` | `specscore code ...` | `deps` | [`cli/code`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/code/README.md) |
+| `idea/` | `specscore idea ...` | TBD — pending CLI migration to strict resource+verb pattern | [`cli/new/idea`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/new/idea/README.md) |
 
-The Synchestra.io CLI ecosystem (synchestra, specscore, rehearse) is standardising on a strict `resource + verb` command shape. The top-level `specscore new` command is legacy from before this convention and is not wrapped here; it will be replaced by the appropriate `<resource> new` form in the CLI.
+The Synchestra.io CLI ecosystem (synchestra, specscore, rehearse) is standardising on a strict `resource + verb` command shape. The top-level `specscore new` command is legacy from before this convention and is not wrapped here; it will be replaced by the appropriate `<resource> new` form in the CLI. The shared exit-code contract, output-format conventions, and `--project` autodetect rules that every wrapper assumes are defined once in the [CLI parent feature](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md).
 
 The exact shape of each resource skill follows the template defined in [`agent-skills` feature spec](https://github.com/synchestra-io/synchestra/blob/main/spec/features/agent-skills/README.md#skill-file-format):
 

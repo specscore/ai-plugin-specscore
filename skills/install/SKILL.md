@@ -43,3 +43,5 @@ specscore --version
 ```
 
 If the binary is found and prints a version, continue with the user's original request. If not, ask the user to check their `PATH` and re-run install.
+
+The output shape (bare semver, no `v` prefix) is pinned by the [`cli/version`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/version/README.md) feature spec.
