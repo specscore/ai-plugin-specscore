@@ -39,7 +39,7 @@ A change in the CLI surface typically produces a matching skill update in this r
 
 ## Relationship to other plugins
 
-`specscore` is a base-layer **CLI wrapper** plugin. Methodology plugins such as [`spec-driven-development`](https://github.com/synchestra-io/ai-plugin-sdd) depend on it to compose multi-step workflows. See [ADR-0004](https://github.com/synchestra-io/synchestra/blob/main/spec/decisions/0004-layered-plugin-architecture.md) for the full layering rationale.
+`specscore` is a base-layer **CLI wrapper** plugin. Methodology plugins such as [`spec-studio`](https://github.com/synchestra-io/spec-studio) depend on it to compose multi-step workflows. See [ADR-0004](https://github.com/synchestra-io/synchestra/blob/main/spec/decisions/0004-layered-plugin-architecture.md) for the full layering rationale.
 
 Sister plugin: [`synchestra-cli`](https://github.com/synchestra-io/ai-plugin-synchestra) — wraps the `synchestra` CLI using the same structure.
 

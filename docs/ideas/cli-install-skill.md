@@ -35,7 +35,7 @@ The pattern ports cleanly to sibling plugins (`synchestra-cli` has the same shap
 ## Not Doing (and Why)
 
 - **Bundling CLI binaries in the plugin** — ~10–20MB × 5 platforms = 50–100MB plugin weight, and it fights ADR-0004 / README §Releases, which explicitly decouple plugin and CLI release cycles.
-- **SessionStart / PreToolUse hook** — runs on every Claude Code session for anyone who has the plugin, including transitive installs via methodology plugins (e.g. `spec-driven-development`). Executing `curl | sh` checks on sessions where the user never intends to use specscore is surprising behavior for a CLI wrapper plugin.
+- **SessionStart / PreToolUse hook** — runs on every Claude Code session for anyone who has the plugin, including transitive installs via methodology plugins (e.g. `spec-studio`). Executing `curl | sh` checks on sessions where the user never intends to use specscore is surprising behavior for a CLI wrapper plugin.
 - **A separate "doctor" skill** — Q5 confirmed "always latest, no breaking changes." There is no version-enforcement job, so `doctor` collapses into `install`. Don't build the thing you don't need.
 - **Lazy-download shim (`bin/specscore` in plugin that fetches on first run)** — duplicates what `get-cli` already does; adds a second install path to maintain alongside the canonical one.
 - **Version pinning of the CLI from the plugin** — explicitly out of scope per Q5.

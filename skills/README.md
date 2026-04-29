@@ -79,5 +79,5 @@ The CLI-wrapper skills listed above are still planned; individual wrappers ship 
 ## Outstanding Questions
 
 - The final per-verb list tracks the `specscore` CLI's evolving surface. When new CLI commands land, a corresponding reference file is added here in the same release cycle.
-- Whether to ship a `design/` skill in this plugin is **parked**. There is no `specscore design` CLI command today. If one is added later, a wrapping skill lands in the same release. Until then, "design" is purely a methodology concept and lives in the [`spec-driven-development`](https://github.com/synchestra-io/ai-plugin-sdd) plugin.
+- Whether to ship a `design/` skill in this plugin is **parked**. There is no `specscore design` CLI command today. If one is added later, a wrapping skill lands in the same release. Until then, "design" is purely a methodology concept and lives in the [`spec-studio`](https://github.com/synchestra-io/spec-studio) plugin.
 - Final shape of the `idea/` skill depends on the `specscore` CLI migrating fully to the resource+verb pattern (e.g., `specscore idea new <slug>` instead of the current `specscore idea <slug>`).
