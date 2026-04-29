@@ -47,7 +47,7 @@ specscore feature refs <feature_id> \
 specscore feature refs cli
 # cli/code
 # cli/feature
-# cli/new
+# cli/idea
 # cli/spec
 # cli/task
 # cli/version

@@ -1,10 +1,8 @@
-# specscore new idea
+# specscore idea new
 
 Scaffold a lint-clean Idea artifact at `spec/ideas/<slug>.md`. Each required section is emitted with an HTML-comment prompt describing what belongs there. Content can be supplied via flags or gathered interactively with `-i`.
 
-> **Note on command shape.** The CLI command today is `specscore new idea <slug>` (under the legacy top-level `new` group). When the CLI migrates fully to the strict resource+verb pattern, the invocation will become `specscore idea new <slug>`. This reference will be updated when that lands; the skill's user-facing name (`idea`) does not change.
-
-**CLI reference:** [`cli/new/idea`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/new/idea/README.md)
+**CLI reference:** [`cli/idea/new`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/idea/new/README.md)
 
 ## When to use
 
@@ -16,7 +14,7 @@ Scaffold a lint-clean Idea artifact at `spec/ideas/<slug>.md`. Each required sec
 ## Command
 
 ```bash
-specscore new idea <slug> \
+specscore idea new <slug> \
   [--title <text>] \
   [--owner <id>] \
   [--hmw <text>] \
@@ -59,14 +57,14 @@ specscore new idea <slug> \
 ### Minimal scaffold
 
 ```bash
-specscore new idea offline-mode
+specscore idea new offline-mode
 # Creates spec/ideas/offline-mode.md with TODO prompts
 ```
 
 ### With flag-supplied content
 
 ```bash
-specscore new idea offline-mode \
+specscore idea new offline-mode \
   --title "Offline Mode" \
   --hmw "How might we let users keep working when their connection drops without losing data?" \
   --not-doing "Sync conflict resolution UI — out of MVP scope" \
@@ -76,21 +74,21 @@ specscore new idea offline-mode \
 ### Interactive prompt
 
 ```bash
-specscore new idea offline-mode -i
+specscore idea new offline-mode -i
 # Prompts on stdin for each field; flag values become defaults.
 ```
 
 ### Overwrite an existing draft
 
 ```bash
-specscore new idea offline-mode --force
+specscore idea new offline-mode --force
 # Existing file replaced. No backup is made.
 ```
 
 ### Verify lint-clean immediately
 
 ```bash
-specscore new idea my-idea
+specscore idea new my-idea
 specscore spec lint --severity warning
 # 0 violations found
 ```
@@ -100,6 +98,6 @@ specscore spec lint --severity warning
 - **Lint-clean guarantee:** the generated file passes [`spec lint`](../../spec/references/lint.md) on first creation, even if every body field was left as a `<!-- TODO: ... -->` prompt. Prompts are valid Markdown and don't trip placeholder rules.
 - **Slug format:** lowercase, hyphen-separated, URL-safe. `My_Idea` exits `2`.
 - **Conflict semantics:** by default, a pre-existing `spec/ideas/<slug>.md` is a hard `1` (Conflict). `--force` overwrites without backup — use deliberately.
-- **Owner default:** `$USER`. Tracked as an [open question](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/new/idea/README.md#outstanding-questions) whether to derive from `gh auth status` instead.
+- **Owner default:** `$USER`. Tracked as an [open question](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/idea/new/README.md#outstanding-questions) whether to derive from `gh auth status` instead.
 - **Methodology vs. artifact:** this skill creates the file. For the divergent/convergent process that produces a *good* Idea, use the [`spec-studio:ideate`](https://github.com/synchestra-io/spec-studio) skill — it delegates file creation to this command when the CLI is installed.
 - **Promotion:** when a Feature later names the Idea in its `## Source Ideas:` field, tooling appends to the Idea's `## Promotes To:` list and transitions its status from `Approved` → `Specified`. See the [Idea feature spec](https://github.com/synchestra-io/specscore/blob/main/spec/features/idea/README.md) for the full lifecycle.

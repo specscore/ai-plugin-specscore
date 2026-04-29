@@ -6,7 +6,7 @@ user-invocable: true
 
 # SpecScore Idea scaffolding
 
-This skill wraps the `specscore` CLI's Idea-creation surface. Today the underlying CLI command is `specscore new idea <slug>` (under the legacy top-level `new` group); when the CLI migrates fully to the strict resource+verb pattern (`specscore idea new <slug>`) this skill's invocation will be updated transparently — the agent-facing skill name remains `idea`.
+This skill wraps the `specscore idea` command family — creation surface for SpecScore Idea artifacts.
 
 ## Pre-flight check
 
@@ -40,4 +40,4 @@ For the **methodology** of refining ideas (divergent / convergent thinking, stre
 
 ## Exit codes (shared)
 
-`specscore new idea` shares the [SpecScore CLI exit-code contract](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md#shared-exit-code-contract). Per-verb specifics in [references/new.md](references/new.md).
+`specscore idea` commands share the [SpecScore CLI exit-code contract](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md#shared-exit-code-contract). Per-verb specifics in [references/new.md](references/new.md).
