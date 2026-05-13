@@ -27,7 +27,7 @@ specscore feature tree [<feature_id>] \
 |---|---|---|
 | `<feature_id>` | No | Feature to focus on. If omitted, the full tree is rendered. |
 | `--direction` | No | `up` shows ancestors only; `down` shows subtree only. Requires `<feature_id>`. |
-| `--fields` | No | Inline metadata (e.g., `status,oq`) appended to each entry. |
+| `--fields` | No | Inline metadata appended to each entry. Recognized: `title`, `status`, `oq` (count), `questions` (full text), `deps`, `refs`, `children`, `plans`. |
 | `--format` | No | Output format: `text` (default, indented), `yaml`, or `json` (nested objects). |
 | `--project` | No | Project root path. Autodetected from `cwd` if omitted. |
 
@@ -105,6 +105,29 @@ specscore feature tree cli/feature --direction down
 ```bash
 specscore feature tree --format json | jq '.children[].id'
 ```
+
+### Outstanding-question dashboard
+
+```bash
+specscore feature tree --fields title,oq,questions
+```
+
+```yaml
+- path: cli/feature
+  title: Feature (CLI)
+  oq: 2
+  questions:
+    - Should field names move to a shared registry, or stay documented per-command?
+    - Should `feature new` accept a `--from-idea <slug>` flag?
+  child_nodes:
+    - path: cli/feature/tree
+      title: Feature Tree
+      oq: 1
+      questions:
+        - Should the focus marker be configurable?
+```
+
+Use this to surface unresolved questions across the project without opening each README. `oq` is the count; `questions` is the full text of each top-level `- ` item under the README's `## Outstanding Questions` section, in document order. The two stay in lockstep — `len(questions) == oq`. When a feature has no `## Outstanding Questions` section, `oq` is `0` and `questions` is omitted.
 
 ## Notes
 

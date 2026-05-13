@@ -24,7 +24,7 @@ specscore feature list \
 
 | Flag | Required | Description |
 |---|---|---|
-| `--fields` | No | Comma-separated metadata fields to include per entry (e.g., `status,oq`). Forces structured output. |
+| `--fields` | No | Comma-separated metadata fields to include per entry. Recognized: `title`, `status`, `oq` (count), `questions` (full text), `deps`, `refs`, `children`, `plans`. Forces structured output. |
 | `--format` | No | Output format: `yaml`, `json`, or `text`. Default `text` without `--fields`; auto-upgrades to `yaml` when `--fields` is set. |
 | `--project` | No | Project root path. Autodetected by walking up from `cwd` to find `specscore-spec-repo.yaml` if omitted. |
 
