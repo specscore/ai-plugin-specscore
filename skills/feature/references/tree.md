@@ -127,7 +127,9 @@ specscore feature tree --fields title,oq,questions
         - Should the focus marker be configurable?
 ```
 
-Use this to surface unresolved questions across the project without opening each README. `oq` is the count; `questions` is the full text of each top-level `- ` item under the README's `## Outstanding Questions` section, in document order. The two stay in lockstep — `len(questions) == oq`. When a feature has no `## Outstanding Questions` section, `oq` is `0` and `questions` is omitted.
+When researching a feature before changing it or implementing against it, run `tree --fields=oq,questions` first. A non-zero `oq` means the spec author flagged unresolved decisions — read those before assuming the spec is settled. Implementing on top of an open question often means picking a side the human hasn't picked yet.
+
+`oq` is the count; `questions` is the full text of each top-level `- ` item under the README's `## Outstanding Questions` section, in document order. The two stay in lockstep — `len(questions) == oq`. When a feature has no `## Outstanding Questions` section, `oq` is `0` and `questions` is omitted.
 
 ## Notes
 
