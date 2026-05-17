@@ -13,11 +13,11 @@ This repository contains the plugin source. It is installed on top of the [`spec
 
 ## Install
 
-Via the [Synchestra.io meta-marketplace](https://github.com/synchestra-io/ai-marketplace):
+Via the [Sneat AI marketplace](https://github.com/sneat-co/ai-marketplace):
 
 ```
-/plugin marketplace add synchestra-io/ai-marketplace
-/plugin install specscore@synchestra-io
+/plugin marketplace add sneat-co/ai-marketplace
+/plugin install specscore@sneat-co
 ```
 
 Requires Claude Code v2.1.110 or later if installed transitively as a dependency of another plugin.

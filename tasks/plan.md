@@ -141,7 +141,7 @@ Strictly sequential. Each task is single-file, S-sized. No parallelism opportuni
 
 - [ ] `skills/README.md` and `README.md` render cleanly on GitHub (push to a branch and eyeball).
 - [ ] All relative links resolve (`./install/SKILL.md`, plugin manifest, ADRs).
-- [ ] A fresh reader can go from "I just ran `/plugin install specscore@synchestra-io`" to "I have a working `specscore` CLI" using only the repo's README and one slash invocation.
+- [ ] A fresh reader can go from "I just ran `/plugin install specscore@sneat-co`" to "I have a working `specscore` CLI" using only the repo's README and one slash invocation.
 - [ ] Human review + approval before commit/PR.
 
 ---

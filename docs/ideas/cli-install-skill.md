@@ -2,7 +2,7 @@
 
 ## Problem Statement
 
-**How might we ensure that after `/plugin install specscore@synchestra-io`, the very next `/specscore:*` invocation succeeds — without making the plugin itself own multi-platform binary distribution?**
+**How might we ensure that after `/plugin install specscore@sneat-co`, the very next `/specscore:*` invocation succeeds — without making the plugin itself own multi-platform binary distribution?**
 
 Today there is an implicit gap: the plugin README declares the `specscore` CLI a prerequisite, but nothing in the plugin surface helps the user cross that gap. A human runs `/plugin install`, invokes a skill, and gets `command not found: specscore` with no in-context path forward.
 
