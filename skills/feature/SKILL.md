@@ -1,6 +1,6 @@
 ---
 name: feature
-description: Navigate and manage SpecScore feature specifications — list features, render hierarchy trees, inspect metadata, trace dependencies, find reverse references, scaffold new features. Use whenever you need to understand or change the spec graph.
+description: Navigate and manage SpecScore feature specifications — list features, render hierarchy trees, inspect metadata, trace dependencies, find reverse references, scaffold new features, transition feature lifecycle status. Use whenever you need to understand or change the spec graph.
 user-invocable: true
 ---
 
@@ -36,6 +36,7 @@ Do not proceed with the original command until `specscore --version` succeeds.
 | Trace what a feature depends on | [references/deps.md](references/deps.md) |
 | Find what depends on (references) a feature | [references/refs.md](references/refs.md) |
 | Scaffold a new feature directory | [references/new.md](references/new.md) |
+| Transition a feature's lifecycle status (Draft → Under Review → Approved → Implementing → Stable → Deprecated) | [references/change-status.md](references/change-status.md) |
 
 ## Exit codes (shared)
 

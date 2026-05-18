@@ -29,11 +29,11 @@ The wrapper catalogue mirrors the `specscore` CLI surface. One resource-level sk
 
 | Skill | Wraps | Verbs | CLI feature spec |
 |---|---|---|---|
-| [`feature/`](feature/SKILL.md) | `specscore feature ...` | `list`, `info`, `tree`, `deps`, `refs`, `new` | [`cli/feature`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/feature/README.md) |
+| [`feature/`](feature/SKILL.md) | `specscore feature ...` | `list`, `info`, `tree`, `deps`, `refs`, `new`, `change-status` | [`cli/feature`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/feature/README.md) |
 | [`task/`](task/SKILL.md) | `specscore task ...` | `list`, `info`, `new` | [`cli/task`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/task/README.md) |
 | [`spec/`](spec/SKILL.md) | `specscore spec ...` | `lint` | [`cli/spec`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/spec/README.md) |
 | [`code/`](code/SKILL.md) | `specscore code ...` | `deps` | [`cli/code`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/code/README.md) |
-| [`idea/`](idea/SKILL.md) | `specscore idea ...` | `new` | [`cli/idea`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/idea/README.md) |
+| [`idea/`](idea/SKILL.md) | `specscore idea ...` | `new`, `change-status` | [`cli/idea`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/idea/README.md) |
 
 The Synchestra.io CLI ecosystem (synchestra, specscore, rehearse) standardises on a strict `resource + verb` command shape; every skill in the catalogue follows it. The shared exit-code contract, output-format conventions, and `--project` autodetect rules that every wrapper assumes are defined once in the [CLI parent feature](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md).
 
