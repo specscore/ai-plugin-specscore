@@ -5,7 +5,7 @@
   "author": {
     "name": "Synchestra.io"
   },
-  "homepage": "https://github.com/synchestra-io/ai-plugin-specscore",
-  "repository": "https://github.com/synchestra-io/ai-plugin-specscore",
+  "homepage": "https://github.com/specscore/ai-plugin-specscore",
+  "repository": "https://github.com/specscore/ai-plugin-specscore",
   "license": "MIT"
 }
