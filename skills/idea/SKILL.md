@@ -1,12 +1,12 @@
 ---
 name: idea
-description: Scaffold a new lint-clean SpecScore Idea artifact at `spec/ideas/<slug>.md`. Use when capturing a pre-spec, problem-direction-MVP one-pager that may later promote to one or more Features.
+description: Scaffold and transition lifecycle status of SpecScore Idea artifacts at `spec/ideas/<slug>.md`. Use for creating a new pre-spec one-pager, approving a Draft Idea, or archiving an Idea that has been superseded or abandoned.
 user-invocable: true
 ---
 
-# SpecScore Idea scaffolding
+# SpecScore Idea scaffolding and lifecycle
 
-This skill wraps the `specscore idea` command family — creation surface for SpecScore Idea artifacts.
+This skill wraps the `specscore idea` command family — creation and lifecycle surface for SpecScore Idea artifacts.
 
 ## Pre-flight check
 
@@ -31,6 +31,7 @@ Do not proceed with the original command until `specscore --version` succeeds.
 | You need to… | Read |
 |---|---|
 | Scaffold a new Idea artifact at `spec/ideas/<slug>.md` | [references/new.md](references/new.md) |
+| Transition an Idea's lifecycle status (approve, archive) | [references/change-status.md](references/change-status.md) |
 
 ## What an Idea is
 
@@ -40,4 +41,4 @@ For the **methodology** of refining ideas (divergent / convergent thinking, stre
 
 ## Exit codes (shared)
 
-`specscore idea` commands share the [SpecScore CLI exit-code contract](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md#shared-exit-code-contract). Per-verb specifics in [references/new.md](references/new.md).
+`specscore idea` commands share the [SpecScore CLI exit-code contract](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md#shared-exit-code-contract). Per-verb specifics in [references/new.md](references/new.md) and [references/change-status.md](references/change-status.md).
