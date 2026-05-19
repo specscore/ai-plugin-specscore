@@ -1,6 +1,6 @@
 # Idea: Lifecycle Status Skill
 
-**Status:** Implementing
+**Status:** Specified
 **Date:** 2026-05-19
 **Owner:** alexander.trakhimenok@gmail.com
 **Promotes To:** lifecycle-status-skill
