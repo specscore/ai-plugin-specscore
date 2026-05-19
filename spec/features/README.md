@@ -6,7 +6,7 @@ Feature specifications for this project.
 
 | Feature | Status | Description |
 |---------|--------|-------------|
-| [lifecycle-status-skill](lifecycle-status-skill/README.md) | Approved | Dedicated skill that advertises itself as the canonical route whenever an AI agent needs to change the lifecycle status of any SpecScore artifact. |
+| [lifecycle-status-skill](lifecycle-status-skill/README.md) | Implementing | Dedicated skill that advertises itself as the canonical route whenever an AI agent needs to change the lifecycle status of any SpecScore artifact. |
 
 ## Outstanding Questions
 

@@ -16,6 +16,7 @@ All skills are prefixed with the plugin's manifest name. Users invoke them as:
 
 - **Infrastructure skills** — plugin-level actions that are not backed by a `specscore` CLI command. Today this category contains only `install`, which bootstraps the CLI itself.
 - **CLI-wrapper skills** — one skill per `specscore` CLI resource group (`feature`, `task`, `spec`, `code`, `idea`). Each wrapper assumes the CLI is already installed and callable; see the [Pre-flight pattern](#pre-flight-pattern) below for the shared check wrappers must include.
+- **Cross-kind action skills** — verb-level skills that span more than one resource group. These exist when an action ("change a status", "search across kinds") has the same shape for every kind it touches and discoverability benefits from one dedicated entry point. Cross-kind skills do not replace the CLI-wrapper skill rows that document the same verb in their own catalog tables — they are additive.
 
 ## Available infrastructure skills
 
@@ -34,6 +35,14 @@ The wrapper catalogue mirrors the `specscore` CLI surface. One resource-level sk
 | [`spec/`](spec/SKILL.md) | `specscore spec ...` | `lint` | [`cli/spec`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/spec/README.md) |
 | [`code/`](code/SKILL.md) | `specscore code ...` | `deps` | [`cli/code`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/code/README.md) |
 | [`idea/`](idea/SKILL.md) | `specscore idea ...` | `new`, `change-status` | [`cli/idea`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/idea/README.md) |
+
+## Available cross-kind action skills
+
+Cross-kind skills surface a single action that has the same shape across multiple resource kinds. They dispatch internally by kind to the matching CLI verb. The per-kind `change-status` rows in the CLI-wrapper catalog above remain as deep links for navigation-flow users.
+
+| Skill | Action | Kinds covered | Wraps |
+|---|---|---|---|
+| [`change-status/`](change-status/SKILL.md) | Transition a SpecScore artifact's `**Status:**` field | Feature, Idea | `specscore feature change-status`, `specscore idea change-status` |
 
 The Synchestra.io CLI ecosystem (synchestra, specscore, rehearse) standardises on a strict `resource + verb` command shape; every skill in the catalogue follows it. The shared exit-code contract, output-format conventions, and `--project` autodetect rules that every wrapper assumes are defined once in the [CLI parent feature](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md).
 
