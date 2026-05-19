@@ -1,0 +1,7 @@
+# SpecScore Repo Config Schema: https://specscore.md/repo-config
+
+project:
+    title: ai-plugin-specscore
+    host: github.com
+    org: specscore
+    repo: ai-plugin-specscore
