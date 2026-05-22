@@ -6,7 +6,7 @@ Index of SpecScore Plan artifacts. Each Plan decomposes a single source Feature 
 |---|---|---|---|
 | [`lifecycle-status-skill`](lifecycle-status-skill.md) | [`lifecycle-status-skill`](../features/lifecycle-status-skill/README.md) | Draft | 2026-05-19 |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

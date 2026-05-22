@@ -85,6 +85,5 @@ Each shipped wrapper SKILL.md embeds this block verbatim at the top. If the snip
 
 All wrappers in the catalogue are now available. New CLI verbs land in the relevant skill's `references/` directory in the same release cycle as the CLI surface change.
 
-## Outstanding Questions
-
+## Open Questions
 - Whether to ship a `design/` skill in this plugin is **parked**. There is no `specscore design` CLI command today. If one is added later, a wrapping skill lands in the same release. Until then, "design" is purely a methodology concept and lives in the [`spec-studio`](https://github.com/synchestra-io/spec-studio) plugin.

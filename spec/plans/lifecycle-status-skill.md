@@ -34,7 +34,7 @@ Create the two per-kind reference files. Each documents the exact `specscore <ki
 
 Add a row for the new `change-status/` skill to `skills/README.md` — in a new "Cross-kind action skills" category (or equivalent placement that does not mis-classify a verb-level skill as a CLI-wrapper or infrastructure skill). Then verify, by diff against `origin/main`, that `skills/feature/SKILL.md`, `skills/idea/SKILL.md`, `skills/feature/references/change-status.md`, and `skills/idea/references/change-status.md` are byte-identical to their pre-Feature versions — explicitly satisfying both REQs that `AC: deep-links-survive` verifies. No edits to those four files are permitted under this task.
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

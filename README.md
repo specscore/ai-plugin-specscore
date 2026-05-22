@@ -51,6 +51,5 @@ Releases are tagged as `specscore--v<version>` on this repository to support Cla
 
 MIT — see [LICENSE](LICENSE).
 
-## Outstanding Questions
-
+## Open Questions
 None at this time.

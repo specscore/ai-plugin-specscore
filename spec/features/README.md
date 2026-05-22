@@ -8,7 +8,7 @@ Feature specifications for this project.
 |---------|--------|-------------|
 | [lifecycle-status-skill](lifecycle-status-skill/README.md) | Stable | Dedicated skill that advertises itself as the canonical route whenever an AI agent needs to change the lifecycle status of any SpecScore artifact. |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 

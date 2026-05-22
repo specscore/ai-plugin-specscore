@@ -63,7 +63,7 @@ One new skill at `skills/change-status/SKILL.md` whose `description` frontmatter
 - **Existing Features affected:** none in this repo yet (the existing `specscore:feature` and `specscore:idea` skills are unaffected; their `change-status` references stay).
 - **Dependencies:** the `specscore` CLI's `feature change-status` and `idea change-status` verbs (already shipped in 0.1.x).
 
-## Outstanding Questions
+## Open Questions
 
 - Should the dedicated skill's slug be `change-status` or `lifecycle-status` in the plugin's `skills/` namespace? `change-status` matches the CLI verb name and the existing reference filename; `lifecycle-status` more directly mirrors the conceptual surface ("lifecycle"). Decision deferred to the Feature spec.
 

@@ -221,7 +221,7 @@ The slug naming open question from the Idea is resolved here in favor of `change
 **When** an inspector reads `skills/feature/SKILL.md` and `skills/idea/SKILL.md`
 **Then** both skills still list `change-status` in their verb pickers, both still ship their `references/change-status.md` files, and the `description` frontmatter strings on each skill are byte-identical to the pre-Feature versions.
 
-## Outstanding Questions
+## Open Questions
 
 - Should the parent-skill descriptions on `skills/feature/SKILL.md` and `skills/idea/SKILL.md` be softened to de-prioritize `change-status` once the dedicated skill ships? The MVP defers this to a fast-follow gated on a retrieval A/B; the question is parked, not resolved.
 - When does Task and/or Plan grow a `change-status` CLI verb? Adding kind rows to the picker is a trivial extension, but the trigger requires upstream CLI work in `specscore-cli`.

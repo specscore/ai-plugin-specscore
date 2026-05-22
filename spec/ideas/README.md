@@ -8,7 +8,7 @@ Pre-spec one-pagers. Each Idea is a lint-clean problem-direction-MVP one-pager t
 |------|--------|------|-------|-------------|
 | [lifecycle-status-skill](lifecycle-status-skill.md) | Specified | 2026-05-19 | alexander.trakhimenok@gmail.com | lifecycle-status-skill |
 
-## Outstanding Questions
+## Open Questions
 
 None at this time.
 
