@@ -1,6 +1,6 @@
 ---
 name: idea
-description: Scaffold and transition lifecycle status of SpecScore Idea artifacts at `spec/ideas/<slug>.md`. Use for creating a new pre-spec one-pager, approving a Draft Idea, or archiving an Idea that has been superseded or abandoned.
+description: List, inspect, scaffold, and transition SpecScore Idea artifacts at `spec/ideas/<slug>.md`. Use whenever you need to list open ideas, check an idea's status, filter ideas by lifecycle stage, create a new pre-spec one-pager, approve a Draft Idea, or archive an Idea that has been superseded or abandoned.
 user-invocable: true
 ---
 
@@ -30,6 +30,7 @@ Do not proceed with the original command until `specscore --version` succeeds.
 
 | You need to… | Read |
 |---|---|
+| List all ideas (optionally filtered by status) | [references/list.md](references/list.md) |
 | Scaffold a new Idea artifact at `spec/ideas/<slug>.md` | [references/new.md](references/new.md) |
 | Transition an Idea's lifecycle status (approve, archive) | [references/change-status.md](references/change-status.md) |
 
