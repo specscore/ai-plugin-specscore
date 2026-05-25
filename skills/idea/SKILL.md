@@ -36,10 +36,10 @@ Do not proceed with the original command until `specscore --version` succeeds.
 
 ## What an Idea is
 
-An Idea is a **pre-spec, lintable one-pager** that captures a problem, a recommended direction, an MVP scope, and the assumptions that must hold for the direction to be worth pursuing. Ideas are the optional front-door to SpecScore: they refine a vague concept into something concrete enough to promote into one or more [Features](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/feature/README.md).
+An Idea is a **pre-spec, lintable one-pager** that captures a problem, a recommended direction, an MVP scope, and the assumptions that must hold for the direction to be worth pursuing. Ideas are the optional front-door to SpecScore: they refine a vague concept into something concrete enough to promote into one or more [Features](https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/feature/README.md).
 
-For the **methodology** of refining ideas (divergent / convergent thinking, stress-testing assumptions), use the [`spec-studio:ideate`](https://github.com/synchestra-io/spec-studio) skill. This skill is the *artifact-creation* surface only.
+For the **methodology** of refining ideas (divergent / convergent thinking, stress-testing assumptions), use the [`specstudio:ideate`](https://github.com/specscore/specstudio-skills) skill. This skill is the *artifact-creation* surface only.
 
 ## Exit codes (shared)
 
-`specscore idea` commands share the [SpecScore CLI exit-code contract](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md#shared-exit-code-contract). Per-verb specifics in [references/new.md](references/new.md) and [references/change-status.md](references/change-status.md).
+`specscore idea` commands share the [SpecScore CLI exit-code contract](https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/README.md#shared-exit-code-contract). Per-verb specifics in [references/new.md](references/new.md) and [references/change-status.md](references/change-status.md).

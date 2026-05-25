@@ -2,11 +2,11 @@
 
 Transition an Idea artifact from its current `**Status:**` to the target named by `--to`. The verb validates the transition against the Idea legal-transition matrix, rewrites the status line, and (for `--to=archived`) moves the file to `spec/ideas/archived/<slug>.md`. The post-mutation `specscore spec lint --fix` keeps the active and archived index rows in sync.
 
-**CLI reference:** [`cli/idea/change-status`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/idea/change-status/README.md)
+**CLI reference:** [`cli/idea/change-status`](https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/idea/change-status/README.md)
 
-## Synchestra-presence pre-flight
+## Lifecycle-transitions contract
 
-This verb mutates the Idea kind's `**Status:**` field. The [lifecycle-transitions contract](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/lifecycle-transitions/README.md) requires that when both `specscore` and a corresponding Synchestra command are installed on the user's machine, this skill SHOULD prefer the Synchestra command for that doc kind. Today **no Synchestra equivalent exists for Idea lifecycle**, so `specscore` is unconditionally the canonical path. If `synchestra idea change-status` appears in a future Synchestra release, update this pre-flight block to route to it when present.
+This verb mutates the Idea kind's `**Status:**` field. The [lifecycle-transitions contract](https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/lifecycle-transitions/README.md) governs which transitions are valid. `specscore` is the canonical path for Idea lifecycle transitions.
 
 ## When to use
 

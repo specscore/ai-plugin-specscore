@@ -1,9 +1,9 @@
 {
   "name": "specscore",
   "description": "SpecScore CLI plugin: skills that teach AI agents how to use the specscore CLI for spec navigation, linting, and lifecycle operations.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": {
-    "name": "Synchestra.io"
+    "name": "SpecScore.md"
   },
   "homepage": "https://github.com/specscore/ai-plugin-specscore",
   "repository": "https://github.com/specscore/ai-plugin-specscore",

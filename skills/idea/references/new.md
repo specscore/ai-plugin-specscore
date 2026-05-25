@@ -2,7 +2,7 @@
 
 Scaffold a lint-clean Idea artifact at `spec/ideas/<slug>.md`. Each required section is emitted with an HTML-comment prompt describing what belongs there. Content can be supplied via flags or gathered interactively with `-i`.
 
-**CLI reference:** [`cli/idea/new`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/idea/new/README.md)
+**CLI reference:** [`cli/idea/new`](https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/idea/new/README.md)
 
 ## When to use
 
@@ -98,6 +98,6 @@ specscore spec lint --severity warning
 - **Lint-clean guarantee:** the generated file passes [`spec lint`](../../spec/references/lint.md) on first creation, even if every body field was left as a `<!-- TODO: ... -->` prompt. Prompts are valid Markdown and don't trip placeholder rules.
 - **Slug format:** lowercase, hyphen-separated, URL-safe. `My_Idea` exits `2`.
 - **Conflict semantics:** by default, a pre-existing `spec/ideas/<slug>.md` is a hard `1` (Conflict). `--force` overwrites without backup — use deliberately.
-- **Owner default:** `$USER`. Tracked as an [open question](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/idea/new/README.md#outstanding-questions) whether to derive from `gh auth status` instead.
-- **Methodology vs. artifact:** this skill creates the file. For the divergent/convergent process that produces a *good* Idea, use the [`spec-studio:ideate`](https://github.com/synchestra-io/spec-studio) skill — it delegates file creation to this command when the CLI is installed.
-- **Promotion:** when a Feature later names the Idea in its `## Source Ideas:` field, tooling appends to the Idea's `## Promotes To:` list and transitions its status from `Approved` → `Specified`. See the [Idea feature spec](https://github.com/synchestra-io/specscore/blob/main/spec/features/idea/README.md) for the full lifecycle.
+- **Owner default:** `$USER`. Tracked as an [open question](https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/idea/new/README.md#outstanding-questions) whether to derive from `gh auth status` instead.
+- **Methodology vs. artifact:** this skill creates the file. For the divergent/convergent process that produces a *good* Idea, use the [`specstudio:ideate`](https://github.com/specscore/specstudio-skills) skill — it delegates file creation to this command when the CLI is installed.
+- **Promotion:** when a Feature later names the Idea in its `## Source Ideas:` field, tooling appends to the Idea's `## Promotes To:` list and transitions its status from `Approved` → `Specified`. See the [Idea feature spec](https://github.com/specscore/specscore-cli/blob/main/spec/features/idea/README.md) for the full lifecycle.
