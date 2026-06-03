@@ -1,6 +1,6 @@
 ---
 name: change-status
-description: Change the lifecycle status of any SpecScore artifact — Feature or Idea — via the `specscore` CLI. Use whenever an AI agent or user needs to transition, approve, deprecate, archive, or mark stable a Feature (Draft → Under Review → Approved → Implementing → Stable → Deprecated) or an Idea (Draft → Under Review → Approved → Archived). This is the canonical route for any change-status action on a Feature or Idea — prefer it over direct file edits of the `**Status:**` line.
+description: Change the lifecycle status of any SpecScore artifact — Feature or Idea — via the `specscore` CLI. Use whenever an AI agent or user needs to transition, approve, deprecate, archive, or mark stable a Feature (Draft → Under Review → Approved → Implementing → Stable → Deprecated) or an Idea (Draft → Under Review → Approved → Specifying → Specified → Implementing → Implemented (or → Archived)). This is the canonical route for any change-status action on a Feature or Idea — prefer it over direct file edits of the `**Status:**` line.
 user-invocable: true
 ---
 

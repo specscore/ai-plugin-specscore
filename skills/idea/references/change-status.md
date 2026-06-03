@@ -11,7 +11,7 @@ This verb mutates the Idea kind's `**Status:**` field. The [lifecycle-transition
 ## When to use
 
 - **Promote an Idea from `Draft` to `Approved`** after a successful review pass
-- **Archive an Idea** that has been superseded, abandoned, or otherwise removed from active consideration — covers `Draft`, `Under Review`, `Approved`, `Implementing`, and `Specified` source states
+- **Archive an Idea** that has been superseded, abandoned, or otherwise removed from active consideration — covers `Draft`, `Under Review`, `Approved`, `Specifying`, `Specified`, `Implementing`, and `Implemented` source states
 - **Replace a hand-edit** of the `**Status:**` line that previously required a follow-up `specscore spec lint --fix` to keep the index row consistent
 
 ## Command
@@ -26,23 +26,30 @@ specscore idea change-status <slug> --to=<status> \
 | Name / Flag | Required | Description |
 |---|---|---|
 | `<slug>` | Yes | Idea slug — identifies the active file at `spec/ideas/<slug>.md`. An already-archived file at `spec/ideas/archived/<slug>.md` does NOT satisfy the lookup. |
-| `--to` | Yes | Target status. Legal values: `approved`, `archived` (case-insensitive). Multi-word target values are not in the Idea matrix today. |
+| `--to` | Yes | Target status. Legal values: `Approved`, `Archived`, `Implemented`, `Implementing`, `Specified`, `Specifying` (case-insensitive). |
 | `--project` | No | Project root path. Autodetected from `cwd` if omitted. |
 
 ## Legal transitions
 
 | From | To | Side effects |
 |---|---|---|
-| `Draft` | `Approved` | Status rewrite + ideas-index sync |
-| `Draft` | `Archived` | Status rewrite + file move + active-index + archived-index sync |
+| `Draft` | `Approved`, `Archived` | Status rewrite + ideas-index sync (`→ Archived`: + file move + active-index + archived-index sync) |
 | `Under Review` | `Archived` | Status rewrite + file move + active-index + archived-index sync |
-| `Approved` | `Archived` | Status rewrite + file move + active-index + archived-index sync |
-| `Implementing` | `Archived` | Status rewrite + file move + active-index + archived-index sync |
-| `Specified` | `Archived` | Status rewrite + file move + active-index + archived-index sync |
+| `Approved` | `Specifying`, `Archived` | Status rewrite + ideas-index sync (`→ Archived`: + file move + active-index + archived-index sync) |
+| `Specifying` | `Specified`, `Archived` | Status rewrite + ideas-index sync (`→ Archived`: + file move + active-index + archived-index sync) |
+| `Specified` | `Implementing`, `Archived` | Status rewrite + ideas-index sync (`→ Archived`: + file move + active-index + archived-index sync) |
+| `Implementing` | `Implemented`, `Archived` | Status rewrite + ideas-index sync (`→ Archived`: + file move + active-index + archived-index sync) |
+| `Implemented` | `Archived` | Status rewrite + file move + active-index + archived-index sync |
 
 Any other `(from, to)` pair exits `4` (InvalidTransition). The state machine is strict — re-running with the current status as `--to` is rejected, not silently skipped.
 
-`Specified` and `Implementing` as TARGETS are NOT in the matrix; those transitions are managed externally (Synchestra-driven `Specified` when a Feature declares `source_idea`, plan-tool-driven `Implementing`).
+`Specifying`, `Specified`, `Implementing`, and `Implemented` are **both auto-derived AND legal manual `--to` targets**. The idea status is auto-derived from referenced Features (and `specscore spec lint --fix` reconciles drift):
+
+- no Feature references → `Approved`
+- 1+ refs, any referenced Feature at `Draft`/`Under Review` → `Specifying`
+- 1+ refs, every referenced Feature at `Approved` → `Specified`
+- 1+ refs, any referenced Feature at `Implementing` → `Implementing`
+- 1+ refs, every referenced Feature at `Stable` → `Implemented`
 
 ## Exit codes
 
@@ -50,7 +57,7 @@ Any other `(from, to)` pair exits `4` (InvalidTransition). The state machine is 
 |---|---|---|
 | `0` | Transition succeeded; indexes synced | Parse the single-line stdout `<slug>: <from> → <to>`. |
 | `1` | Archive collision: `spec/ideas/archived/<slug>.md` already exists | Choose a different slug, or move the stale archived file aside. The active file was rolled back to its original status. |
-| `2` | Missing or malformed `<slug>`, missing `--to`, or unrecognized `--to` value | Check arguments; the legal `--to` set is `{approved, archived}`. |
+| `2` | Missing or malformed `<slug>`, missing `--to`, or unrecognized `--to` value | Check arguments; the legal `--to` set is `{Approved, Archived, Implemented, Implementing, Specified, Specifying}`. |
 | `3` | No Idea file at `spec/ideas/<slug>.md` | Verify the slug; try [`idea new`](new.md) if it doesn't exist yet. |
 | `4` | `(current_status, --to)` is not a legal transition | Read the matrix above; check the current status with `head spec/ideas/<slug>.md`. |
 | `10` | I/O failure during rewrite, file move, or `spec lint --fix` failed after a successful rewrite (rollback applied) | Inspect stderr for the underlying lint or I/O error. The on-disk state is the pre-invocation state. |
@@ -95,7 +102,7 @@ specscore idea change-status offline-mode --to=APPROVED
 ```bash
 specscore idea change-status offline-mode --to=approved
 # Already at Approved.
-# Exit 4: invalid transition Approved → Approved (legal targets from Approved: Archived)
+# Exit 4: invalid transition Approved → Approved (legal targets from Approved: Specifying, Archived)
 ```
 
 ## Notes
