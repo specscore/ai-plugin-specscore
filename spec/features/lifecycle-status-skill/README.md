@@ -1,3 +1,8 @@
+---
+format: https://specscore.md/feature-specification
+status: Stable
+---
+
 # Feature: Lifecycle Status Skill
 
 > [SpecScore.**Studio**](https://specscore.studio): | [Explore](https://specscore.studio/app/p/github.com/specscore/ai-plugin-specscore/spec/features/lifecycle-status-skill?op=explore) | [Edit](https://specscore.studio/app/p/github.com/specscore/ai-plugin-specscore/spec/features/lifecycle-status-skill?op=edit) | [Ask question](https://specscore.studio/app/p/github.com/specscore/ai-plugin-specscore/spec/features/lifecycle-status-skill?op=ask) | [Request change](https://specscore.studio/app/p/github.com/specscore/ai-plugin-specscore/spec/features/lifecycle-status-skill?op=request-change) |

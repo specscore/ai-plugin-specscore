@@ -1,3 +1,7 @@
+---
+format: https://specscore.md/plans-index-specification
+---
+
 # Plans
 
 Index of SpecScore Plan artifacts. Each Plan decomposes a single source Feature into an ordered, AC-mapped task list.
