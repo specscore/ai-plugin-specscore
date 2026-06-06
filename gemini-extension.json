@@ -1,5 +1,5 @@
 {
   "name": "specscore",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "SpecScore CLI skills for Gemini CLI: spec navigation, linting, artifact lifecycle operations, and code-to-spec checks. Gemini auto-discovers the bundled skills/ tree."
 }

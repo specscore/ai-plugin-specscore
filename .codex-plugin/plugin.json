@@ -1,6 +1,6 @@
 {
   "name": "specscore",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "SpecScore CLI plugin: skills that teach AI agents how to use the specscore CLI for spec navigation, linting, and lifecycle operations.",
   "author": {
     "name": "SpecScore",
