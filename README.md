@@ -10,10 +10,13 @@ This repository contains the plugin source. It is installed on top of the [`spec
 |---|---|
 | [`skills/`](skills/README.md) | Agent skills — one per SpecScore CLI resource group, progressively loaded per-verb |
 | [`.claude-plugin/`](.claude-plugin/plugin.json) | Claude Code plugin manifest |
+| [`.codex-plugin/`](.codex-plugin/plugin.json) | Codex plugin manifest |
 
 ## Install
 
-Via the [SpecScore AI marketplace](https://github.com/specscore/ai-marketplace):
+Via the [SpecScore AI marketplace](https://github.com/specscore/ai-marketplace).
+
+### Claude Code
 
 ```
 /plugin marketplace add specscore/ai-marketplace
@@ -22,11 +25,18 @@ Via the [SpecScore AI marketplace](https://github.com/specscore/ai-marketplace):
 
 Requires Claude Code v2.1.110 or later if installed transitively as a dependency of another plugin.
 
+### Codex
+
+```
+codex plugin marketplace add specscore/ai-marketplace
+codex plugin add specscore@specscore
+```
+
 ## First use
 
 The `specscore` CLI must be on your `PATH` before any wrapper skill can run. Two options:
 
-- Invoke `/specscore:install` inside Claude Code — the [install skill](skills/install/SKILL.md) wraps the official installer and runs it with your approval.
+- Invoke `specscore:install` inside your AI agent — the [install skill](skills/install/SKILL.md) shows the official installer options.
 - Or run manually in your terminal: `curl -fsSL https://specscore.md/get-cli | sh`.
 
 Verify with `specscore --version`.

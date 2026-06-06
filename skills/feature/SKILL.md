@@ -1,6 +1,7 @@
 ---
 name: feature
-description: Navigate and manage SpecScore feature specifications — list features, render hierarchy trees, inspect metadata, trace dependencies, find reverse references, scaffold new features, transition feature lifecycle status. Use whenever you need to understand or change the spec graph. Use when asked to list features, check feature status, show what's implemented or in progress, or query the specification tree.
+description: |
+  Navigate and manage SpecScore feature specifications — list features, render hierarchy trees, inspect metadata, trace dependencies, find reverse references, scaffold new features, transition feature lifecycle status. Use whenever you need to understand or change the spec graph. Use when asked to list features, check feature status, show what's implemented or in progress, or query the specification tree.
 user-invocable: true
 ---
 

@@ -1,0 +1,47 @@
+{
+  "name": "specscore",
+  "version": "0.0.7",
+  "description": "SpecScore CLI plugin: skills that teach AI agents how to use the specscore CLI for spec navigation, linting, and lifecycle operations.",
+  "author": {
+    "name": "SpecScore",
+    "url": "https://specscore.md"
+  },
+  "homepage": "https://github.com/specscore/ai-plugin-specscore",
+  "repository": "https://github.com/specscore/ai-plugin-specscore",
+  "license": "MIT",
+  "keywords": [
+    "specscore",
+    "spec-driven-development",
+    "specification-driven-development",
+    "sdd",
+    "spec",
+    "lint",
+    "cli",
+    "ai-coding",
+    "codex",
+    "codex-plugin",
+    "agent-skills",
+    "engineering",
+    "development"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "SpecScore",
+    "shortDescription": "SpecScore CLI skills for Codex.",
+    "longDescription": "SpecScore teaches Codex how to use the specscore CLI for spec navigation, linting, artifact lifecycle operations, and code-to-spec checks.",
+    "developerName": "SpecScore",
+    "category": "Developer Tools",
+    "capabilities": [
+      "CLI",
+      "Workflow",
+      "Review"
+    ],
+    "websiteURL": "https://github.com/specscore/ai-plugin-specscore",
+    "defaultPrompt": [
+      "Lint this repo's SpecScore specs.",
+      "Show install options for specscore CLI.",
+      "List the SpecScore features in this repo."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

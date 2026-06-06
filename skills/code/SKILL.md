@@ -1,6 +1,7 @@
 ---
 name: code
-description: Query source-code → SpecScore relationships. Reads `specscore:` annotations and bare `https://specscore.md/...` URLs from comments and reports the features, plans, or docs source files depend on. Use for impact analysis or code-to-spec traceability.
+description: |
+  Query source-code → SpecScore relationships. Reads `specscore:` annotations and bare `https://specscore.md/...` URLs from comments and reports the features, plans, or docs source files depend on. Use for impact analysis or code-to-spec traceability.
 user-invocable: true
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: task
-description: Read and seed a SpecScore project's task board — list tasks, inspect a single task, create a new task in `planning`. Use whenever you need to read the board, check task status, list open or in-progress tasks, or add a fresh entry. Status transitions are out of scope for this MVP.
+description: |
+  Read and seed a SpecScore project's task board — list tasks, inspect a single task, create a new task in `planning`. Use whenever you need to read the board, check task status, list open or in-progress tasks, or add a fresh entry. Status transitions are out of scope for this MVP.
 user-invocable: true
 ---
 

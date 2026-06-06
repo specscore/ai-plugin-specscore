@@ -1,6 +1,7 @@
 ---
 name: spec
-description: Validate a SpecScore specification tree against structural conventions. Use whenever you've edited specs, before creating commits, or when CI needs to gate on spec hygiene.
+description: |
+  Validate a SpecScore specification tree against structural conventions. Use whenever you've edited specs, before creating commits, or when CI needs to gate on spec hygiene.
 user-invocable: true
 ---
 

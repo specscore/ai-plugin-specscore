@@ -1,6 +1,7 @@
 ---
 name: idea
-description: List, inspect, scaffold, and transition SpecScore Idea artifacts at `spec/ideas/<slug>.md`. Use whenever you need to list open ideas, check an idea's status, filter ideas by lifecycle stage, create a new pre-spec one-pager, approve a Draft Idea, or archive an Idea that has been superseded or abandoned.
+description: |
+  List, inspect, scaffold, and transition SpecScore Idea artifacts at `spec/ideas/<slug>.md`. Use whenever you need to list open ideas, check an idea's status, filter ideas by lifecycle stage, create a new pre-spec one-pager, approve a Draft Idea, or archive an Idea that has been superseded or abandoned.
 user-invocable: true
 ---
 
