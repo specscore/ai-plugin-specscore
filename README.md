@@ -11,12 +11,16 @@ This repository contains the plugin source. It is installed on top of the [`spec
 | [`skills/`](skills/README.md) | Agent skills — one per SpecScore CLI resource group, progressively loaded per-verb |
 | [`.claude-plugin/`](.claude-plugin/plugin.json) | Claude Code plugin manifest |
 | [`.codex-plugin/`](.codex-plugin/plugin.json) | Codex plugin manifest |
+| [`gemini-extension.json`](gemini-extension.json) | Gemini CLI extension manifest |
+| [`.github/plugin.json`](.github/plugin.json) | GitHub Copilot CLI / VS Code agent plugin manifest |
 
 ## Install
 
-Via the [SpecScore AI marketplace](https://github.com/specscore/ai-marketplace).
+The same `skills/<name>/SKILL.md` payload is shared across all agents — only the manifest each agent reads differs.
 
 ### Claude Code
+
+Via the [SpecScore AI marketplace](https://github.com/specscore/ai-marketplace):
 
 ```
 /plugin marketplace add specscore/ai-marketplace
@@ -29,7 +33,33 @@ Requires Claude Code v2.1.110 or later if installed transitively as a dependency
 
 ```
 codex plugin marketplace add specscore/ai-marketplace
-codex plugin add specscore@specscore
+```
+
+Then enable the `specscore` plugin from Codex's plugin directory. (Codex has no `codex plugin add` subcommand; installation happens through the plugin directory after the marketplace is added.) Codex reads [`.codex-plugin/plugin.json`](.codex-plugin/plugin.json).
+
+### Gemini CLI
+
+```
+gemini extensions install https://github.com/specscore/ai-plugin-specscore
+```
+
+Gemini reads [`gemini-extension.json`](gemini-extension.json) and auto-discovers the bundled `skills/` tree.
+
+### GitHub Copilot CLI
+
+```
+copilot plugin install specscore/ai-plugin-specscore
+```
+
+Copilot reads [`.github/plugin.json`](.github/plugin.json).
+
+### Cursor
+
+Cursor has no remote-install command — it loads skills from `.cursor/skills/` (project) or `~/.cursor/skills/` (global). Add these skills by copying them in:
+
+```
+git clone https://github.com/specscore/ai-plugin-specscore
+mkdir -p .cursor/skills && cp -R ai-plugin-specscore/skills/* .cursor/skills/
 ```
 
 ## First use
