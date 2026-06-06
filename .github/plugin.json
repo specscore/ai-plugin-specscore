@@ -1,0 +1,27 @@
+{
+  "name": "specscore",
+  "description": "SpecScore CLI plugin: skills that teach AI agents how to use the specscore CLI for spec navigation, linting, and lifecycle operations.",
+  "version": "0.0.7",
+  "author": {
+    "name": "SpecScore"
+  },
+  "license": "MIT",
+  "keywords": [
+    "specscore",
+    "spec-driven-development",
+    "sdd",
+    "spec",
+    "lint",
+    "cli",
+    "agent-skills"
+  ],
+  "skills": [
+    "./skills/change-status",
+    "./skills/code",
+    "./skills/feature",
+    "./skills/idea",
+    "./skills/install",
+    "./skills/spec",
+    "./skills/task"
+  ]
+}
