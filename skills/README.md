@@ -15,7 +15,7 @@ All skills are prefixed with the plugin's manifest name. Users invoke them as:
 ## Skill categories
 
 - **Infrastructure skills** — plugin-level actions that are not backed by a `specscore` CLI command. Today this category contains only `install`, which bootstraps the CLI itself.
-- **CLI-wrapper skills** — one skill per `specscore` CLI resource group (`feature`, `task`, `spec`, `code`, `idea`). Each wrapper assumes the CLI is already installed and callable; see the [Pre-flight pattern](#pre-flight-pattern) below for the shared check wrappers must include.
+- **CLI-wrapper skills** — one skill per `specscore` CLI resource group (`feature`, `task`, `spec`, `code`, `idea`, `plan`). Each wrapper assumes the CLI is already installed and callable; see the [Pre-flight pattern](#pre-flight-pattern) below for the shared check wrappers must include.
 - **Cross-kind action skills** — verb-level skills that span more than one resource group. These exist when an action ("change a status", "search across kinds") has the same shape for every kind it touches and discoverability benefits from one dedicated entry point. Cross-kind skills do not replace the CLI-wrapper skill rows that document the same verb in their own catalog tables — they are additive.
 
 ## Available infrastructure skills
@@ -35,6 +35,7 @@ The wrapper catalogue mirrors the `specscore` CLI surface. One resource-level sk
 | [`spec/`](spec/SKILL.md) | `specscore spec ...` | `lint` | [`cli/spec`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/spec/README.md) |
 | [`code/`](code/SKILL.md) | `specscore code ...` | `deps` | [`cli/code`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/code/README.md) |
 | [`idea/`](idea/SKILL.md) | `specscore idea ...` | `new`, `change-status` | [`cli/idea`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/idea/README.md) |
+| [`plan/`](plan/SKILL.md) | `specscore plan ...` | `list`, `info`, `new` | [`cli/plan`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/plan/README.md) |
 
 ## Available cross-kind action skills
 
@@ -81,7 +82,7 @@ Each shipped wrapper SKILL.md embeds this block verbatim at the top. If the snip
 
 ## Status
 
-**Shipped:** `install/` (infrastructure), `feature/`, `task/`, `spec/`, `code/`, `idea/` (CLI wrappers).
+**Shipped:** `install/` (infrastructure), `feature/`, `task/`, `spec/`, `code/`, `idea/`, `plan/` (CLI wrappers).
 
 All wrappers in the catalogue are now available. New CLI verbs land in the relevant skill's `references/` directory in the same release cycle as the CLI surface change.
 
