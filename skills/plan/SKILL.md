@@ -1,7 +1,7 @@
 ---
 name: plan
 description: |
-  Read and scaffold a SpecScore project's plans — list plans, inspect a single plan's metadata and task-status rollup, and scaffold a new lint-clean Plan from a Source Feature or Source Idea. Use whenever you need to read plans, check a plan's status, or create a new plan artifact. Status transitions are out of scope for this MVP.
+  Read and scaffold a SpecScore project's plans — list plans, inspect a single plan's metadata and task-status rollup, and scaffold a new lint-clean Plan from a Source Feature, a Source Idea, or no source at all (source-less). Use whenever you need to read plans, check a plan's status, or create a new plan artifact. Status transitions are out of scope for this MVP.
 user-invocable: true
 ---
 
@@ -33,7 +33,7 @@ Do not proceed with the original command until `specscore --version` succeeds.
 |---|---|
 | List plans (optionally filtered by status, with selected metadata fields) | [references/list.md](references/list.md) |
 | Inspect one plan's metadata and task-status rollup | [references/info.md](references/info.md) |
-| Scaffold a new lint-clean plan from a Source Feature or Source Idea | [references/new.md](references/new.md) |
+| Scaffold a new lint-clean plan from a Source Feature, a Source Idea, or no source (source-less) | [references/new.md](references/new.md) |
 
 ## Scope of this group
 
