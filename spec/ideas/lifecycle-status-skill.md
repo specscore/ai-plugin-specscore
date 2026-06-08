@@ -1,11 +1,11 @@
 ---
 format: https://specscore.md/idea-specification
-status: Specified
+status: Implemented
 ---
 
 # Idea: Lifecycle Status Skill
 
-**Status:** Specified
+**Status:** Implemented
 **Date:** 2026-05-19
 **Owner:** alexander.trakhimenok@gmail.com
 **Promotes To:** lifecycle-status-skill
