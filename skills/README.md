@@ -14,7 +14,7 @@ All skills are prefixed with the plugin's manifest name. Users invoke them as:
 
 ## Skill categories
 
-- **Infrastructure skills** — plugin-level actions that are not backed by a `specscore` CLI command. Today this category contains only `install`, which bootstraps the CLI itself.
+- **Infrastructure skills** — CLI/binary-lifecycle actions that bootstrap or maintain the `specscore` binary itself: `install` (bootstrap the CLI when it is missing) and `self-update` (move an existing install to the latest release).
 - **CLI-wrapper skills** — one skill per `specscore` CLI resource group (`feature`, `task`, `spec`, `code`, `idea`, `plan`). Each wrapper assumes the CLI is already installed and callable; see the [Pre-flight pattern](#pre-flight-pattern) below for the shared check wrappers must include.
 - **Cross-kind action skills** — verb-level skills that span more than one resource group. These exist when an action ("change a status", "search across kinds") has the same shape for every kind it touches and discoverability benefits from one dedicated entry point. Cross-kind skills do not replace the CLI-wrapper skill rows that document the same verb in their own catalog tables — they are additive.
 
@@ -23,6 +23,7 @@ All skills are prefixed with the plugin's manifest name. Users invoke them as:
 | Skill | Purpose |
 |---|---|
 | [`install/`](install/SKILL.md) | Install the `specscore` CLI via the official `get-cli` installer. Runtime prerequisite for every wrapper skill. |
+| [`self-update/`](self-update/SKILL.md) | Update an installed `specscore` CLI to the latest release via `specscore self-update` (self-replace for manual installs; package-manager redirect for Homebrew/Scoop/WinGet). See [`cli/self-update`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/self-update/README.md). |
 
 ## Available CLI-wrapper skills
 

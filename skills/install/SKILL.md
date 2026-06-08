@@ -1,7 +1,7 @@
 ---
 name: install
 description: |
-  Show install instructions for the specscore CLI. Use when `specscore` is not on PATH, when another skill reports `command not found: specscore`, or when the user asks how to install, reinstall, or update the CLI.
+  Show install instructions for the specscore CLI. Use when `specscore` is not on PATH, when another skill reports `command not found: specscore`, or when the user asks how to install or reinstall the CLI. To UPDATE an already-installed CLI to a newer release, use the `self-update` skill instead.
 user-invocable: true
 ---
 
@@ -29,7 +29,9 @@ Present both paths and let the user pick:
 curl -fsSL https://specscore.md/get-cli | sh
 ```
 
-Re-running is safe — the installer replaces the existing binary in place. This is also the update path; there is no separate update command.
+Re-running is safe — the installer replaces the existing binary in place.
+
+> **Updating an existing install?** Once the CLI is installed, the canonical way to move to the latest release is the CLI's own update command, `specscore self-update` — see the [`self-update`](../self-update/SKILL.md) skill. Re-running the installer above also works for manual installs.
 
 ### 2. Manual install (all platforms, including native Windows PowerShell)
 
