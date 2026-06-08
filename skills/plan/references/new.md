@@ -17,6 +17,7 @@ This command is the **single source of canonical plan structure** — prefer it 
 ```bash
 specscore plan new <slug> \
   (--feature <feature-slug> | --idea <idea-slug>) \
+  [--parent <plan-ref>] \
   [--title <text>] \
   [--owner <id>] \
   [--force] \
@@ -30,6 +31,7 @@ specscore plan new <slug> \
 | `<slug>` | Yes | Plan slug — lowercase, hyphen-separated, URL-safe, no `/`. Becomes the file name (`spec/plans/<slug>.md`). |
 | `--feature` | One of | Source Feature slug. Mutually exclusive with `--idea`. |
 | `--idea` | One of | Source Idea slug. Mutually exclusive with `--feature`. |
+| `--parent` | No | Parent (master) plan reference for cross-repo plan composition — a same-repo slug or a `<repo-slug>:<plan-slug>` cross-repo soft ref. Emits a `**Parent:**` line, recorded verbatim; validated by lint rule `P-005`, not by this verb. An empty value exits `2`. |
 | `--title` | No | Plan title. Defaults to the title-cased slug. |
 | `--owner` | No | Owner / author. Defaults to `$USER`. |
 | `--force` | No | Overwrite an existing plan file at that slug. |
@@ -66,6 +68,15 @@ specscore plan new ship-onboarding \
   --feature onboarding \
   --title "Ship onboarding flow" \
   --owner alex
+```
+
+### As a cross-repo sub-plan (records a Parent)
+
+```bash
+specscore plan new feature-1-plan-composition-cli \
+  --feature cli/plan/new \
+  --parent specscore:cross-repo-plan-composition
+# scaffolds **Parent:** specscore:cross-repo-plan-composition (verbatim; P-005 validates it)
 ```
 
 ## Notes
