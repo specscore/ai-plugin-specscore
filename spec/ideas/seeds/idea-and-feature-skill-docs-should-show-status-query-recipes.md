@@ -1,12 +1,7 @@
 ---
 type: sidekick-seed
-slug: idea-and-feature-skill-docs-should-show-status-query-recipes
-captured_at: 2026-06-04T00:00:00Z
 captured_by: user
-captured_during: null
-trigger: explicit
 status: queued
-synchestra_task: null
 ---
 
 # idea and feature skill docs should show status query recipes so agents don't grep

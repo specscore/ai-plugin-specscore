@@ -10,7 +10,7 @@ Pre-spec one-pagers. Each Idea is a lint-clean problem-direction-MVP one-pager t
 
 | Idea | Status | Date | Owner | Promotes To |
 |------|--------|------|-------|-------------|
-| [lifecycle-status-skill](lifecycle-status-skill.md) | Specified | 2026-05-19 | alexander.trakhimenok@gmail.com | lifecycle-status-skill |
+| [lifecycle-status-skill](lifecycle-status-skill.md) | Implemented | 2026-05-19 | alexander.trakhimenok@gmail.com | lifecycle-status-skill |
 
 ## Open Questions
 
