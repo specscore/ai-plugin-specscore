@@ -14,7 +14,7 @@ status: Stable
 
 ## Summary
 
-A dedicated Claude Code skill — `specscore:change-status` — that wraps both `specscore feature change-status` and `specscore idea change-status` behind one entry point and explicitly advertises itself as the canonical route whenever an AI agent needs to change the lifecycle status of any SpecScore artifact. Serves AI agents executing methodology workflows (`/specify`, `/plan`, `/implement`) that need to transition Feature or Idea statuses without falling back to direct file edits.
+A dedicated Claude Code skill — `specscore:change-status` — that wraps `specscore feature change-status`, `specscore idea change-status`, and `specscore task change-status` behind one entry point and explicitly advertises itself as the canonical route whenever an AI agent needs to change the lifecycle status of any SpecScore artifact. Serves AI agents executing methodology workflows (`/specify`, `/plan`, `/implement`) that need to transition Feature, Idea, or Task statuses without falling back to direct file edits — and, for the Task kind, to record implementation-commit provenance at completion.
 
 ## Problem
 
@@ -37,12 +37,12 @@ The skill MUST reside at `skills/change-status/SKILL.md` in this plugin reposito
 The skill's YAML frontmatter MUST include:
 
 - `name: change-status`
-- `description:` — a single string that explicitly advertises the skill as the canonical route for transitioning the lifecycle status of any SpecScore artifact (Feature or Idea today; extensible to additional kinds later). The description MUST name the action vocabulary an agent is likely to reason in — "change status", "transition", "approve", "archive", "deprecate", "mark stable" — and MUST name both `Feature` and `Idea` artifact kinds so retrieval ranks for either.
+- `description:` — a single string that explicitly advertises the skill as the canonical route for transitioning the lifecycle status of any SpecScore artifact (Feature, Idea, and Task today; extensible to additional kinds later). The description MUST name the action vocabulary an agent is likely to reason in — "change status", "transition", "approve", "archive", "deprecate", "mark stable", "complete a task" — and MUST name the `Feature`, `Idea`, and `Task` artifact kinds so retrieval ranks for any.
 - `user-invocable: true` — so users can also trigger the skill directly via `/specscore:change-status`.
 
 #### REQ: description-trigger-coverage
 
-The `description` field MUST cover, at minimum, these intent phrasings: "change status", "transition status", "approve", "archive", "deprecate", "mark stable", plus both artifact kind names ("Feature", "Idea"). Coverage is checked by inspection during PR review against this REQ; no runtime lint rule exists yet.
+The `description` field MUST cover, at minimum, these intent phrasings: "change status", "transition status", "approve", "archive", "deprecate", "mark stable", "complete a task", plus the artifact kind names ("Feature", "Idea", "Task"). Coverage is checked by inspection during PR review against this REQ; no runtime lint rule exists yet.
 
 ### Dispatch by artifact kind
 
@@ -56,12 +56,13 @@ The skill MUST dispatch by artifact kind. The body of `SKILL.md` MUST contain a 
 |---|---|
 | Feature | `references/feature.md` |
 | Idea | `references/idea.md` |
+| Task | `references/task.md` |
 
-The picker mirrors the pattern already used by `skills/feature/SKILL.md` and `skills/idea/SKILL.md`. Adding a new kind in the future is a one-row table edit plus a new reference file.
+The picker mirrors the pattern already used by `skills/feature/SKILL.md` and `skills/idea/SKILL.md`. Adding a new kind in the future is a one-row table edit plus a new reference file — exactly how the `Task` row was added.
 
 #### REQ: reference-files
 
-Each reference file MUST exist at the path named in the picker, MUST document the exact CLI invocation for that kind, MUST list the legal `--to` values, MUST list the exit codes inherited from the [shared CLI exit-code contract](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md#shared-exit-code-contract), and MUST cite the upstream CLI reference URL. References MAY be thin pointers to the existing `change-status.md` files in `skills/feature/references/` and `skills/idea/references/` to avoid duplication, but each MUST stand alone enough that an agent picking the dedicated skill never needs to backtrack into the parent skill.
+Each reference file MUST exist at the path named in the picker, MUST document the exact CLI invocation for that kind, MUST list the legal `--to` values, MUST list the exit codes inherited from the [shared CLI exit-code contract](https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/README.md#shared-exit-code-contract), and MUST cite the upstream CLI reference URL. References MAY be thin pointers to the existing `change-status.md` files in `skills/feature/references/` and `skills/idea/references/` to avoid duplication, but each MUST stand alone enough that an agent picking the dedicated skill never needs to backtrack into the parent skill. The `references/task.md` file additionally MUST document the optional `--repo`/`--commit`/`--branch` provenance flags (valid only with `--to=complete`), the dual board/plan-inline target resolution, and the `--plan` flag — per the upstream [`cli/task/change-status`](https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/task/change-status/README.md) contract.
 
 ### CLI pre-flight and error reporting
 
@@ -73,7 +74,7 @@ Before invoking any `specscore` command, the skill MUST verify the CLI is instal
 
 #### REQ: no-fallback-on-cli-failure
 
-The skill MUST NOT silently fall back to direct file edits on any CLI failure. If `specscore feature change-status` or `specscore idea change-status` exits non-zero, the skill MUST surface the exit code, the verbatim stderr from the CLI, and the canonical interpretation of that exit code per the shared CLI exit-code contract. The skill MUST NOT re-implement the transition logic in skill prose. Avoiding silent fallback is the entire point of the skill — without this rule, the dogfood failure mode returns.
+The skill MUST NOT silently fall back to direct file edits on any CLI failure. If any wrapped `specscore <kind> change-status` verb (`feature`, `idea`, or `task`) exits non-zero, the skill MUST surface the exit code, the verbatim stderr from the CLI, and the canonical interpretation of that exit code per the shared CLI exit-code contract. The skill MUST NOT re-implement the transition logic in skill prose. Avoiding silent fallback is the entire point of the skill — without this rule, the dogfood failure mode returns.
 
 #### REQ: success-output
 
@@ -100,36 +101,38 @@ skills/change-status/
 ├── SKILL.md                    # Frontmatter (name, description, user-invocable) + verb picker + pre-flight
 └── references/
     ├── feature.md              # Feature change-status invocation, --to values, exit codes
-    └── idea.md                 # Idea change-status invocation, --to values, exit codes
+    ├── idea.md                 # Idea change-status invocation, --to values, exit codes
+    └── task.md                 # Task change-status: --to values, provenance flags, dual target, exit codes
 ```
 
 ### Unit responsibilities
 
-- **`skills/change-status/SKILL.md`** — declares the skill to Claude Code, advertises the trigger surface to the skill-matching layer, runs the CLI pre-flight check, and routes the agent to one of two reference files based on the artifact kind named in the agent's request. Depends only on the `specscore` CLI being on `PATH` and on the two sibling reference files.
+- **`skills/change-status/SKILL.md`** — declares the skill to Claude Code, advertises the trigger surface to the skill-matching layer, runs the CLI pre-flight check, and routes the agent to one of three reference files based on the artifact kind named in the agent's request. Depends only on the `specscore` CLI being on `PATH` and on the three sibling reference files.
 - **`skills/change-status/references/feature.md`** — narrow, single-verb reference for `specscore feature change-status`. Documents the legal `--to` values, the legal-transition matrix, exit codes, and example invocations. Cites and (where helpful) cross-links to `skills/feature/references/change-status.md` to avoid duplicating the canonical content; the dedicated reference owns the content that an agent picking this skill needs first.
 - **`skills/change-status/references/idea.md`** — symmetric counterpart for `specscore idea change-status`, including the file-relocation side effect when `--to=archived`.
+- **`skills/change-status/references/task.md`** — reference for `specscore task change-status`. Documents the Task legal-transition matrix, the optional `--repo`/`--commit`/`--branch` implementation-commit provenance flags (valid only with `--to=complete`), the dual board / plan-inline target resolution and the `--plan` flag, and the exit codes — per the upstream [`cli/task/change-status`](https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/task/change-status/README.md) contract.
 
 ### External dependencies
 
-- `specscore` CLI (≥ 0.1.0), specifically the verbs `feature change-status` and `idea change-status`. The skill assumes the CLI exit-code contract documented in [`specscore-cli/spec/features/cli/README.md`](https://github.com/synchestra-io/specscore-cli/blob/main/spec/features/cli/README.md).
+- `specscore` CLI, specifically the verbs `feature change-status`, `idea change-status`, and `task change-status` (the last carrying the optional implementation-commit provenance flags). The skill assumes the CLI exit-code contract documented in [`specscore-cli/spec/features/cli/README.md`](https://github.com/specscore/specscore-cli/blob/main/spec/features/cli/README.md).
 - Claude Code skill-loading machinery, which reads `SKILL.md` frontmatter and exposes the skill via the `Skill` tool and the `/specscore:change-status` slash command.
 
 ## Data flow
 
 ```mermaid
 graph LR
-    A["Agent reasons:<br/>'approve this Feature'"]
+    A["Agent reasons:<br/>'approve this Feature' /<br/>'complete this task + record commit'"]
     B["Claude Code<br/>skill matcher"]
     C["skills/change-status/SKILL.md<br/>pre-flight + picker"]
-    D["references/feature.md<br/>or references/idea.md"]
-    E["specscore feature change-status<br/>or specscore idea change-status"]
-    F["spec/features/&lt;slug&gt;/README.md<br/>or spec/ideas/&lt;slug&gt;.md"]
+    D["references/feature.md /<br/>idea.md / task.md"]
+    E["specscore &lt;kind&gt; change-status<br/>(feature | idea | task)"]
+    F["spec/features/&lt;slug&gt;/README.md,<br/>spec/ideas/&lt;slug&gt;.md, or<br/>task (board / plan-inline)"]
     G["stdout: &lt;id&gt;: &lt;from&gt; → &lt;to&gt;"]
 
     A --> B
     B -->|description match| C
-    C -->|kind = Feature or Idea| D
-    D -->|invoke CLI| E
+    C -->|kind = Feature, Idea, or Task| D
+    D -->|invoke CLI<br/>+ optional provenance flags for Task| E
     E -->|rewrite Status + lint --fix| F
     E --> G
     G --> A
@@ -144,7 +147,8 @@ graph LR
 | Artifact does not exist at expected path | CLI exit `3` | Relay stderr; suggest `specscore feature list` or `specscore idea ...` to confirm slug. |
 | `(current, --to)` not a legal transition | CLI exit `4` | Relay stderr; cite legal-transition matrix from the reference. |
 | I/O failure or `spec lint --fix` failed post-rewrite (rollback applied) | CLI exit `10` | Relay stderr; on-disk state is pre-invocation; do NOT retry automatically. |
-| Agent supplied an artifact kind the skill does not yet support (e.g., Task, Plan) | Internal | Stop; surface that the supported kinds today are Feature and Idea and the matching CLI verbs do not yet exist for the requested kind. Do NOT attempt direct file edits. |
+| Agent supplied an artifact kind the skill does not yet support (e.g., Plan) | Internal | Stop; surface that the supported kinds today are Feature, Idea, and Task, and the matching CLI verb does not yet exist for the requested kind. Do NOT attempt direct file edits. |
+| `--repo`/`--commit`/`--branch` supplied on a Task transition other than `--to=complete` | CLI exit `2` | Relay stderr; cite that provenance flags are valid only with `--to=complete` (per the Task reference). |
 
 The skill never invents a retry, never edits files directly, and never downgrades a non-zero exit to a success.
 
@@ -159,7 +163,7 @@ The skill never invents a retry, never edits files directly, and never downgrade
 
 No Rehearse stubs are scaffolded for this Feature. Rationale:
 
-- The MVP deliverable is a Markdown skill artifact (`SKILL.md` + two reference files). The deliverable has no CLI, HTTP, pure-function, data, UI, filesystem, or event surface that Rehearse can drive.
+- The MVP deliverable is a Markdown skill artifact (`SKILL.md` + three reference files). The deliverable has no CLI, HTTP, pure-function, data, UI, filesystem, or event surface that Rehearse can drive.
 - The behavioral REQs (retrieval, dispatch, no-fallback) are observable only via the Claude Code runtime and the agent's behavior — neither is in scope for Rehearse today.
 - The CLI invariants the skill relies on are owned and tested upstream in `specscore-cli`.
 
@@ -171,7 +175,7 @@ Inherited from the Idea, plus spec-level cuts:
 
 - A `specscore:lifecycle` umbrella skill that handles list / info / refs verbs in addition to change-status.
 - Two split skills (`specscore:feature-status` + `specscore:idea-status`) — explicitly rejected; one unified skill wins.
-- Coverage of Task or Plan kind transitions — the CLI verbs do not exist yet on the 0.1.x line.
+- Coverage of **Plan** kind transitions in this skill — deferred (the `plan change-status` verb exists upstream, but Plan dispatch from this skill is not in scope here). **Task** is now covered, since the `specscore task change-status` verb shipped.
 - Removing the `change-status` references currently shipping inside `skills/feature` and `skills/idea` — they stay as deep links.
 - Re-implementing legal-transition validation in skill prose — owned by the CLI.
 - Editing the `description` frontmatter of `skills/feature/SKILL.md` and `skills/idea/SKILL.md` — deferred to a fast-follow tuning step gated on retrieval evals.
@@ -184,7 +188,7 @@ From [`spec/ideas/lifecycle-status-skill.md`](../../ideas/lifecycle-status-skill
 - **Carried over (must-be-true): CLI matrix stability.** The reference files cite the legal-transition matrix and exit codes directly. The CLI-parity check in the testing strategy is the validation hook for this assumption.
 - **Carried over (should-be-true): unified vs split.** Decided in favor of unified (`REQ: kind-dispatch`); the assumption survives by virtue of the design choice, not as an open validation.
 - **Carried over (should-be-true): no double-retrieval problem.** The MVP ships without softening the parent skills (`REQ: parent-skill-descriptions-unchanged-in-mvp`); the assumption is parked as an [Outstanding Question](#outstanding-questions) to be resolved by retrieval evals.
-- **Carried over (might-be-true): scales to Task/Plan kinds.** Out of scope for the MVP; revisit when those CLI verbs ship.
+- **Realized for Task (was might-be-true): scales to new kinds.** The `Task` kind is now dispatched — the one-row picker edit plus `references/task.md`, exactly as the kind-dispatch design predicted, once the `specscore task change-status` verb shipped. Plan dispatch in this skill remains out of scope.
 
 The slug naming open question from the Idea is resolved here in favor of `change-status` (matching the CLI verb) — see [`REQ: skill-location`](#req-skill-location).
 
@@ -194,13 +198,13 @@ The slug naming open question from the Idea is resolved here in favor of `change
 
 **Given** a fresh checkout of `ai-plugin-specscore` with this Feature shipped
 **When** an inspector reads `skills/change-status/SKILL.md`
-**Then** the file exists at exactly that path, its YAML frontmatter contains `name: change-status`, `user-invocable: true`, and a `description` string that includes every intent phrase enumerated in `REQ: description-trigger-coverage` plus both kind names (`Feature`, `Idea`).
+**Then** the file exists at exactly that path, its YAML frontmatter contains `name: change-status`, `user-invocable: true`, and a `description` string that includes every intent phrase enumerated in `REQ: description-trigger-coverage` plus the kind names (`Feature`, `Idea`, `Task`).
 
 ### AC: dispatch-picker-present (verifies REQ:kind-dispatch, REQ:reference-files)
 
 **Given** `skills/change-status/SKILL.md` has shipped
 **When** an inspector reads the file body
-**Then** it contains a verb-style picker table with at least the rows `Feature → references/feature.md` and `Idea → references/idea.md`, and both referenced files exist, each documenting the exact CLI invocation, legal `--to` values, exit codes, and a link to the upstream CLI reference.
+**Then** it contains a verb-style picker table with at least the rows `Feature → references/feature.md`, `Idea → references/idea.md`, and `Task → references/task.md`, and all three referenced files exist, each documenting the exact CLI invocation, legal `--to` values, exit codes, and a link to the upstream CLI reference — and `references/task.md` additionally documents the optional `--repo`/`--commit`/`--branch` implementation-commit provenance flags (valid only with `--to=complete`) and the `--plan` flag for plan-inline targets.
 
 ### AC: preflight-enforced (verifies REQ:cli-preflight)
 
@@ -229,7 +233,8 @@ The slug naming open question from the Idea is resolved here in favor of `change
 ## Open Questions
 
 - Should the parent-skill descriptions on `skills/feature/SKILL.md` and `skills/idea/SKILL.md` be softened to de-prioritize `change-status` once the dedicated skill ships? The MVP defers this to a fast-follow gated on a retrieval A/B; the question is parked, not resolved.
-- When does Task and/or Plan grow a `change-status` CLI verb? Adding kind rows to the picker is a trivial extension, but the trigger requires upstream CLI work in `specscore-cli`.
+- Should the `Plan` kind also be dispatched by this skill? The `plan change-status` verb exists upstream; adding a `Plan` picker row + `references/plan.md` is the same one-row extension, deferred until there's a clear agent need.
+- Plan-inline Task addressing: the upstream `task change-status` verb leaves the exact `### Task N:` addressing token an open question; `references/task.md` must track whatever the CLI pins so the skill's examples stay accurate.
 
 ---
 *This document follows the https://specscore.md/feature-specification*

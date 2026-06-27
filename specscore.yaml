@@ -5,3 +5,14 @@ project:
     host: github.com
     org: specscore
     repo: ai-plugin-specscore
+
+# Reviewer gates consumed by specstudio skills. The specify gate must release
+# (every entry Approved) before a Feature can move to writing-plans.
+gates:
+    specify:
+        reviewers:
+            - name: ai-spec-reviewer
+              type: ai
+              prompt: .specscore/reviewers/specify-feature-reviewer.md
+            - name: human-approval
+              type: human
