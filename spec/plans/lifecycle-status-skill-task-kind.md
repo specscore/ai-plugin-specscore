@@ -4,7 +4,7 @@ status: Approved
 ---
 # Plan: Lifecycle Status Skill Task Kind
 
-**Status:** Approved
+**Status:** Implemented
 **Source Feature:** lifecycle-status-skill
 **Date:** 2026-06-26
 **Owner:** alex
@@ -25,7 +25,7 @@ Two small, linear tasks gated on the upstream `specscore task change-status` ver
 
 **Verifies:** lifecycle-status-skill#ac:skill-shipped, lifecycle-status-skill#ac:dispatch-picker-present
 **Depends-On:** —
-**Status:** pending
+**Status:** done
 
 Add the `Task → references/task.md` row to the kind-dispatch picker in `skills/change-status/SKILL.md`, and extend the `description` frontmatter to name the `Task` kind and its action vocabulary ("complete a task"), so the skill matcher ranks for Task-transition intents.
 
@@ -33,7 +33,7 @@ Add the `Task → references/task.md` row to the kind-dispatch picker in `skills
 
 **Verifies:** lifecycle-status-skill#ac:dispatch-picker-present
 **Depends-On:** 1
-**Status:** pending
+**Status:** done
 
 Create the standalone `skills/change-status/references/task.md`: the exact `specscore task change-status` invocation, the legal `--to` values, the optional `--repo`/`--commit`/`--branch` provenance flags (valid only with `--to=complete`), the `--plan` flag and dual board/plan-inline target resolution, and the inherited exit-code table — citing the upstream `cli/task/change-status` contract.
 
