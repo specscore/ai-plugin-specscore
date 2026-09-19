@@ -1,5 +1,5 @@
 ---
-name: install
+name: specscore-install
 description: |
   Show install instructions for the specscore CLI. Use when `specscore` is not on PATH, when another skill reports `command not found: specscore`, or when the user asks how to install or reinstall the CLI. To UPDATE an already-installed CLI to a newer release, use the `self-update` skill instead.
 user-invocable: true
