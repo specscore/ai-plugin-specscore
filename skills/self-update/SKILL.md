@@ -1,5 +1,5 @@
 ---
-name: self-update
+name: specscore-self-update
 description: |
   Update the installed specscore CLI to the latest release with `specscore self-update`. Use when the user asks to update, upgrade, or get the newest version of the specscore CLI, when a skill reports the CLI is out of date, or when a feature requires a newer CLI than the one installed.
 user-invocable: true

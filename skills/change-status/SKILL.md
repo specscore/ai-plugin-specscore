@@ -1,5 +1,5 @@
 ---
-name: change-status
+name: specscore-change-status
 description: |
   Change the lifecycle status of any SpecScore artifact — Feature, Idea, or Task — via the `specscore` CLI. Use whenever an AI agent or user needs to transition, approve, deprecate, archive, or mark stable a Feature (Draft → Under Review → Approved → Implementing → Stable → Deprecated) or an Idea (Draft → Under Review → Approved → Specifying → Specified → Implementing → Implemented (or → Archived)), or to change a Task's status — complete a task, mark a task complete/blocked/failed/aborted, or move it through planning → queued → in_progress → blocked → complete (optionally stamping the implementation commit on completion). This is the canonical route for any change-status action on a Feature, Idea, or Task — prefer it over direct file edits of the `**Status:**` line.
 user-invocable: true

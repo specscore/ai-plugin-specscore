@@ -1,5 +1,5 @@
 ---
-name: plan
+name: specscore-plan
 description: |
   Read and scaffold a SpecScore project's plans — list plans, inspect a single plan's metadata and task-status rollup, and scaffold a new lint-clean Plan from a Source Feature, a Source Idea, or no source at all (source-less). Use whenever you need to read plans, check a plan's status, or create a new plan artifact. Status transitions are out of scope for this MVP.
 user-invocable: true
